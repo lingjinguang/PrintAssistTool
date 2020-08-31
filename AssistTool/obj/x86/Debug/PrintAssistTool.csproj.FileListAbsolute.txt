@@ -1,0 +1,3 @@
+F:\PrintAssistTool\IMCISAssistTool\bin\Debug\IMCISAssistTool.exe.config
+F:\PrintAssistTool\IMCISAssistTool\bin\Debug\AssistTool.exe.config
+F:\PrintAssistTool\IMCISAssistTool\bin\Debug\PrintAssistTool.exe.config
