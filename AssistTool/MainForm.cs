@@ -4,6 +4,8 @@ using Microsoft.Win32;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Runtime.InteropServices;
+using System.Net;
+using System.Net.NetworkInformation;
 using PrintAssist.Model;
 using PrintAssist.Utils;
 using PrintAssist.Common;
@@ -63,7 +65,7 @@ namespace PrintAssistTool
             InitializeComponent();
 
             //显示默认端口
-            this.txt_port.Text = "18001";
+            this.txt_port.Text = PortInUse(18001) ? "28001" : "18001";
             this.StartService(true);
 
             //初始化打印列表
@@ -75,7 +77,23 @@ namespace PrintAssistTool
             // 初始化读取数据类型
             InitReadCardType();
         }
+        /// <summary>
+        /// 判断端口是否被使用
+        /// </summary>
+        public static bool PortInUse(int port)
+        {
+            IPGlobalProperties ipProperties = IPGlobalProperties.GetIPGlobalProperties();
+            IPEndPoint[] ipEndPoints = ipProperties.GetActiveTcpListeners();
 
+            foreach (IPEndPoint endPoint in ipEndPoints)
+            {
+                if (endPoint.Port == port)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         /// <summary>
         /// 服务启动
         /// </summary>
