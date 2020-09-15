@@ -63,6 +63,7 @@
             this.tssCompany = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lab_Tips = new System.Windows.Forms.Label();
             this.mymenu.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -328,6 +329,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox1.Controls.Add(this.lab_Tips);
             this.groupBox1.Controls.Add(this.lab_ServiceState);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txt_port);
@@ -416,6 +418,17 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(154, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
+            // lab_Tips
+            // 
+            this.lab_Tips.AutoSize = true;
+            this.lab_Tips.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lab_Tips.ForeColor = System.Drawing.Color.Black;
+            this.lab_Tips.Location = new System.Drawing.Point(290, 88);
+            this.lab_Tips.Name = "lab_Tips";
+            this.lab_Tips.Size = new System.Drawing.Size(112, 14);
+            this.lab_Tips.TabIndex = 11;
+            this.lab_Tips.Text = "即将自动隐藏...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -487,5 +500,6 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lab_Tips;
     }
 }

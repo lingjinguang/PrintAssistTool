@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
+using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace PrintAssistTool
 {
@@ -14,18 +13,20 @@ namespace PrintAssistTool
         [STAThread]
         static void Main()
         {
-            #region 当程序已经打开：结束之前的进程，开启新进程
-            //获取与当前进程同名集合（不包括当前进程）
-            List<Process> processes = Process.GetProcesses().Where(p => p.ProcessName == Process.GetCurrentProcess().ProcessName && p.Id != Process.GetCurrentProcess().Id).ToList();
-            foreach (Process process in processes)
+            #region 自动更新
+            String path = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe";
+            //同时启动自动更新程序
+            if (File.Exists(path))
             {
-                try
+                ProcessStartInfo processStartInfo = new ProcessStartInfo()
                 {
-                    process.Kill();
-                }
-                catch (Exception ex)
+                    FileName = "AutoUpdate.exe",
+                    Arguments = " IMCISAssistTool 0"//1表示静默更新 0表示弹窗提示更新
+                };
+                Process proc = Process.Start(processStartInfo);
+                if (proc != null)
                 {
-                    throw new Exception(ex.Message);
+                    proc.WaitForExit();
                 }
             }
             #endregion
