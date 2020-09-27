@@ -333,9 +333,14 @@ namespace PrintAssistTool
         private void button3_Click(object sender, EventArgs e)
         {
             string res = ICCardUtils.Read(this.comboBox2.Text);
+            res = res == null ? "" : res;
             if (res.IndexOf("读卡出错") >= 0)
             {
                 this.lab_readCard.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                res = "读卡结果：" + res;
             }
             this.lab_readCard.Text = res;
         }
