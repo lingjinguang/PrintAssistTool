@@ -38,6 +38,10 @@ namespace PrintAssist.Model
         /// </summary>
         public string imgBase64 { get; set; }
         /// <summary>
+        /// 打印图片报告比例
+        /// </summary>
+        public string printImageReportScaleRatio { get; set; }
+        /// <summary>
         /// 图片
         /// </summary>
         public Image image { get; set; }
