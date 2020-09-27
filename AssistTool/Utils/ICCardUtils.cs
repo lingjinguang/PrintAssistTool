@@ -39,7 +39,7 @@ namespace PrintAssistTool.Utils
                     case "GETICCARDNOLASTERROR":
                         return GetLastError();
                     default:
-                        return "读卡出错【参数(data)只能是空值、cardInfo、cardNo】";
+                        return string.Format("读卡出错【未知的type：{0}】", type);
                 }
                 /* *
                 if (string.IsNullOrEmpty(type) || type.Equals("cardNo", StringComparison.CurrentCultureIgnoreCase))
