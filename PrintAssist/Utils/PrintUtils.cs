@@ -36,6 +36,8 @@ namespace PrintAssist.Utils
                 {
                     printerData.image = (printType == "FILEPATH" || printType == "HTML") ? new Bitmap(printerData.filePath) : Base64ToImg((printerData.imgBase64).Replace(@"data:image/jpeg;base64,", ""));
                 }
+                SetImgWHByReportScaleRatio(ref printerData);
+                printerData.direction = DirectionByImageWH(printerData); 
                 PrintImagePage(printerData);
             }
             catch (Exception ex)
@@ -84,6 +86,7 @@ namespace PrintAssist.Utils
                 PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
                 printPreviewDialog.WindowState = FormWindowState.Maximized;
                 printPreviewDialog.Document = pd;
+                printPreviewDialog.TopMost = true;
                 printPreviewDialog.ShowDialog();
             }
             (printerData.image).Dispose();
@@ -166,6 +169,7 @@ namespace PrintAssist.Utils
                     PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
                     printPreviewDialog.WindowState = FormWindowState.Maximized;
                     printPreviewDialog.Document = pd;
+                    printPreviewDialog.TopMost = true;
                     printPreviewDialog.ShowDialog();
                 }
                 deleteTemFile();
@@ -335,6 +339,7 @@ namespace PrintAssist.Utils
                     PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
                     printPreviewDialog.WindowState = FormWindowState.Maximized;
                     printPreviewDialog.Document = pd;
+                    printPreviewDialog.TopMost = true;
                     printPreviewDialog.ShowDialog();
                     //pd.IMCISPrintTool();
                 }
@@ -369,6 +374,7 @@ namespace PrintAssist.Utils
                     PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
                     printPreviewDialog.WindowState = FormWindowState.Maximized;
                     printPreviewDialog.Document = pd;
+                    printPreviewDialog.TopMost = true;
                     printPreviewDialog.ShowDialog();
                     //pd.IMCISPrintTool();
                 }
@@ -600,6 +606,30 @@ namespace PrintAssist.Utils
                     height = paperSize.Height;
                     break;
                 }
+            }
+        }
+        public static string DirectionByImageWH(PrinterData printerData)
+        {
+            if (printerData.direction == "0")
+            {
+                if (printerData.image.Width > printerData.image.Height)
+                {
+                    return "2";
+                }
+                else
+                {
+                    return "1";
+                }
+            }
+            return printerData.direction;
+        }
+
+        public static void SetImgWHByReportScaleRatio(ref PrinterData printerData)
+        {
+            if (printerData.direction == "0" && !string.IsNullOrEmpty(printerData.printImageReportScaleRatio))
+            {
+                printerData.width = Convert.ToInt32(printerData.image.Width * Convert.ToDecimal(printerData.printImageReportScaleRatio));
+                printerData.height = Convert.ToInt32(printerData.image.Height * Convert.ToDecimal(printerData.printImageReportScaleRatio));
             }
         }
         #endregion
